@@ -16,7 +16,7 @@ jobs:
           echo test, and deploy your project.
 
   check:
-    uses: ./.github/workflows/cdk-lambda-build-py.yml
+    uses: ./.github/workflows/workflow.yml
     with:
       project-dir: ./
       root_requirements: true
