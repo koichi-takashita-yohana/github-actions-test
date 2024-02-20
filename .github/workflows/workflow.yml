@@ -35,6 +35,6 @@ jobs:
         run: |
           echo "root OK"
       - name: hoge test
-        if: ${{ inputs.hoge }}
+        if: ${{ inputs.hoge }} == false
         run: |
           echo "hoge OK"
