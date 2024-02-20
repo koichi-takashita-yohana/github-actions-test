@@ -1,0 +1,41 @@
+---
+name: workflow test
+on:
+  workflow_call:
+    inputs:
+      project-dir:
+        description: 'project directory'
+        required: true
+        type: string
+      jfrog_url:
+        description: Artifactory URL for PyPi
+        required: false
+        type: string
+        default: "yolabs.jfrog.io/artifactory/api/pypi/pypi/simple"
+      root_requirements:
+        description: Is file in the root directory?
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install Python dependencies
+        run: |
+          pip install -v -r requirements-pip.txt
+          pip install -v -r requirements-dev.txt
+          pip install -v -r src/requirements.txt
+          echo "OK desu"
+      - name: Inputs test
+        if: ${{ inputs.root_requirements }}
+        run: |
+          echo "root OK"
