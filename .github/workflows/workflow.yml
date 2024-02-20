@@ -17,6 +17,11 @@ on:
         required: false
         type: boolean
         default: false
+      hoge:
+        description: hogehoge
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   test:
@@ -25,17 +30,11 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-      - name: Install Python dependencies
-        run: |
-          pip install -v -r requirements-pip.txt
-          pip install -v -r requirements-dev.txt
-          pip install -v -r src/requirements.txt
-          echo "OK desu"
       - name: Inputs test
         if: ${{ inputs.root_requirements }}
         run: |
           echo "root OK"
+      - name: hoge test
+        if: ${{ inputs.hoge }}
+        run: |
+          echo "hoge OK"
