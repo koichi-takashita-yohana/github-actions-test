@@ -3,15 +3,6 @@ name: workflow test
 on:
   workflow_call:
     inputs:
-      project-dir:
-        description: 'project directory'
-        required: true
-        type: string
-      jfrog_url:
-        description: Artifactory URL for PyPi
-        required: false
-        type: string
-        default: "yolabs.jfrog.io/artifactory/api/pypi/pypi/simple"
       root_requirements:
         description: Is file in the root directory?
         required: false
@@ -25,11 +16,10 @@ on:
 
 jobs:
   test:
-    name: Build and test
+    name: Workflow test
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
       - name: Inputs test
         if: ${{ inputs.root_requirements }}
         run: |
@@ -38,3 +28,14 @@ jobs:
         if: ${{ inputs.hoge }} == false
         run: |
           echo "hoge OK"
+      - name: make ccc.txt
+        run: |
+          pwd
+          id
+          hostname
+          ls -la
+          printenv
+          echo c3 > ccc.txt
+          echo "make new ccc.txt"
+          ls -la
+          
