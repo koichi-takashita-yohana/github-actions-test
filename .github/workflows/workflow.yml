@@ -8,11 +8,16 @@ on:
         required: false
         type: boolean
         default: false
-      hoge:
-        description: hogehoge
+      artifact_name:
+        description: artifact_name
         required: false
-        type: boolean
-        default: false
+        type: string
+        default: ""
+      artifact_path:
+        description: artifact_path
+        required: false
+        type: string
+        default: ""
 
 jobs:
   test:
@@ -24,10 +29,6 @@ jobs:
         if: ${{ inputs.root_requirements }}
         run: |
           echo "root OK"
-      - name: hoge test
-        if: ${{ inputs.hoge }} == false
-        run: |
-          echo "hoge OK"
       - name: make ccc.txt
         run: |
           pwd
@@ -35,10 +36,12 @@ jobs:
           hostname
           ls -la
           printenv
-          echo c3 > ccc.txt
-          echo "make new ccc.txt"
-          ls -la
-      - uses: actions/upload-artifact@v4
+      - uses: actions/download-artifact@v4
+        if: ${{ inputs.artifact_name }}
         with:
-          name: myartifact
-          path: ccc.txt
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.artifact_path }}
+      - name: file exist
+        run: |
+          ls -la
+          ls -la hoge/garu
