@@ -17,7 +17,7 @@ on:
         description: artifact_path
         required: false
         type: string
-        default: ""
+        default: "."
 
 jobs:
   test:
