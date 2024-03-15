@@ -18,12 +18,6 @@ jobs:
           ls -la
           printenv
 
-  WorkAction:
-    needs: build
-    uses: ./.github/workflows/workflow.yml
-    with:
-      root_requirements: true
-
   Check:
     runs-on: ubuntu-latest
     needs: WorkAction
@@ -35,17 +29,16 @@ jobs:
           hostname
           ls -la
           printenv
-          mkdir hoge
-      - uses: actions/download-artifact@v4
+          echo c3 > ccc.txt
+      - uses: actions/upload-artifact@v4
         with:
           name: myartifact
-      - uses: actions/download-artifact@v4
-        with:
-          name: myartifact
-          path: hoge/garu
-      - name: check myartifact file
-        run: |
-          ls -la
-          ls -la hoge
-          ls -la hoge/garu
+          path: ccc.txt
+
+  WorkAction:
+    uses: ./.github/workflows/workflow.yml
+    with:
+      root_requirements: true
+      artifact_name: myartifact
+      artifact_path: "hoge/garu"
   
