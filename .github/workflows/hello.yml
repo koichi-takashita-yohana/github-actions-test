@@ -19,12 +19,14 @@ jobs:
           printenv
 
   WorkAction:
+    needs: build
     uses: ./.github/workflows/workflow.yml
     with:
       root_requirements: true
 
   Check:
     runs-on: ubuntu-latest
+    needs: WorkAction
     steps:
       - name: check file and parameter
         run: |
