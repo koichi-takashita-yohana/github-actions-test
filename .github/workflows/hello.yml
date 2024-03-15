@@ -35,3 +35,17 @@ jobs:
           hostname
           ls -la
           printenv
+      - uses: actions/download-artifact@v4
+        with:
+          name: myartifact
+      - uses: actions/download-artifact@v4
+        with:
+          name: myartifact
+          path: hoge/garu
+      - name: check myartifact file
+        run: |
+          ls -la
+          ls -la hoge
+          ls -la hoge/garu
+        
+          
