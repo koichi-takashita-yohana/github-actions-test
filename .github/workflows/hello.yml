@@ -38,5 +38,4 @@ jobs:
     uses: ./.github/workflows/workflow.yml
     with:
       root_requirements: true
-      artifact_name: myartifact
   
