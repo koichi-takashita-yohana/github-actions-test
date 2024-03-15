@@ -39,5 +39,4 @@ jobs:
     with:
       root_requirements: true
       artifact_name: myartifact
-      artifact_path: "hoge/garu"
   
